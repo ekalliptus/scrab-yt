@@ -1,4 +1,4 @@
-# ytdupe — Deteksi Duplikat Konten YouTube
+# ytdupe: Deteksi Duplikat Konten YouTube
 
 **ytdupe** adalah alat CLI untuk mendeteksi duplikasi konten YouTube di level **isi/transkrip**, bukan cuma judul. Cocok untuk tim digital advertising yang perlu mengidentifikasi video re-upload di channel YouTube.
 
@@ -6,11 +6,11 @@
 
 - **Bulk download subtitle** dari seluruh channel YouTube via `yt-dlp`
 - **Deteksi duplikat** menggunakan TF-IDF + cosine similarity
-- **Clustering otomatis** — video yang mirip dikelompokkan (jika A≈B dan B≈C, otomatis jadi satu grup)
-- **Series exclusion** — video seri ("Hari ke-1", "Hari ke-2") otomatis di-skip agar tidak dianggap duplikat
+- **Clustering otomatis**: video yang mirip dikelompokkan (jika A≈B dan B≈C, otomatis jadi satu grup)
+- **Series exclusion**: video seri ("Hari ke-1", "Hari ke-2") otomatis di-skip agar tidak dianggap duplikat
 - **Laporan Excel** multi-sheet dengan warna (PRIMARY hijau, DUPLIKAT merah)
-- **Dukungan Bahasa Indonesia** — stemming & stopword removal via Sastrawi
-- **Integrasi metadata** — gabung data penayangan dari CSV YouTube Studio
+- **Dukungan Bahasa Indonesia**: stemming & stopword removal via Sastrawi
+- **Integrasi metadata**: gabung data penayangan dari CSV YouTube Studio
 
 ## Persyaratan
 
@@ -50,7 +50,7 @@ Edit file `config.yaml` sesuai kebutuhan:
 ```yaml
 channel_url: "https://www.youtube.com/@Gerakanwakafsumur/videos"
 languages: ["id", "en"]           # Bahasa caption: coba Indonesia dulu, fallback English
-sleep_interval: 2                  # Jeda antar download (detik) — naikkan jika error 429
+sleep_interval: 2                  # Jeda antar download (detik), naikkan jika error 429
 similarity_threshold: 0.75         # 0.75 = ketat | 0.60 = longgar (lebih banyak kandidat)
 use_stemming: false                # true = akurat tapi lambat | false = cepat
 exclude_series: true               # Skip video seri (hari ke-1, hari ke-2, dst)
@@ -99,7 +99,7 @@ ytdupe all --channel "https://www.youtube.com/@NamaChannel/videos" --threshold 0
 
 File CSV harus memiliki kolom: `Konten`, `Judul video`, `Waktu publikasi video`, `Durasi`, `Penayangan`, dll.
 
-Jika ada beberapa file CSV (per periode), gabungkan manual atau letakkan di satu folder — sistem otomatis dedupe berdasarkan video ID dan ambil penayangan tertinggi.
+Jika ada beberapa file CSV (per periode), gabungkan manual atau letakkan di satu folder; sistem otomatis dedupe berdasarkan video ID dan ambil penayangan tertinggi.
 
 ## Cara Baca Hasil Excel
 
@@ -111,7 +111,7 @@ Metrik kunci: total video, jumlah cluster duplikat, threshold yang dipakai, tang
 ### Sheet "Duplikat Konten"
 Daftar video duplikat per cluster:
 - **Hijau** = PRIMARY (video dengan penayangan tertinggi, pertahankan)
-- **Merah** = DUPLIKAT (review — kemungkinan re-upload, bisa dihapus/privat)
+- **Merah** = DUPLIKAT (review, kemungkinan re-upload, bisa dihapus/privat)
 - Kolom: Group ID, Status, Video ID, Judul, Tanggal, Durasi, Penayangan, Similarity Score
 
 ### Sheet "Transkrip"
